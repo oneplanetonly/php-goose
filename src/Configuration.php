@@ -4,6 +4,11 @@ namespace Goose;
 
 use Goose\Text\StopWords;
 use Goose\Modules\ModuleInterface;
+use Goose\Modules\Cleaners\DocumentCleaner;
+use Goose\Modules\Extractors\{
+    MetaExtractor, ContentExtractor, ImageExtractor, PublishDateExtractor, AdditionalDataExtractor
+};
+use Goose\Modules\Formatters\OutputFormatter;
 
 /**
  * Configuration
@@ -35,17 +40,17 @@ class Configuration {
     /** @var mixed[] */
     protected $modules = [
         'cleaners' => [
-            '\Goose\Modules\Cleaners\DocumentCleaner',
+            DocumentCleaner::class,
         ],
         'extractors' => [
-            '\Goose\Modules\Extractors\MetaExtractor',
-            '\Goose\Modules\Extractors\ContentExtractor',
-            '\Goose\Modules\Extractors\ImageExtractor',
-            '\Goose\Modules\Extractors\PublishDateExtractor',
-            '\Goose\Modules\Extractors\AdditionalDataExtractor',
+            MetaExtractor::class,
+            ContentExtractor::class,
+            ImageExtractor::class,
+            PublishDateExtractor::class,
+            AdditionalDataExtractor::class,
         ],
         'formatters' => [
-            '\Goose\Modules\Formatters\OutputFormatter',
+            OutputFormatter::class,
         ],
     ];
 
