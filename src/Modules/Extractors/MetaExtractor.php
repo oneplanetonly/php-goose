@@ -57,7 +57,7 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
         }
 
         // Additionally retrieve type values based on provided og:type (http://ogp.me/#types)
-        if (isset($results['type'])) {
+        if (isset($results['type']) && $this->isValidOgType($results['type'])) {
             $nodes = $this->article()->getDoc()->find('meta[property^="' . $results['type'] .':"]');
 
             foreach ($nodes as $node) {
@@ -68,6 +68,11 @@ class MetaExtractor extends AbstractModule implements ModuleInterface {
         }
 
         return $results;
+    }
+
+    private function isValidOgType(string $type): bool
+    {
+        return preg_match('/^[.\-a-z0-9]+$/i', $type) === 1;
     }
 
     /**
